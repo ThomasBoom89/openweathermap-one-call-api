@@ -3,13 +3,13 @@
   "description": "A wrapper for Openweathermap One Call Api v1",
   "license": "MIT",
   "support": {
-    "issues": ""
+    "issues": "https://github.com/ThomasBoom89/openweathermap-one-call-api/issues"
   },
   "authors": [
     {
       "name": "ThomasBoom89",
       "email": "51998416+ThomasBoom89@users.noreply.github.com",
-      "homepage": "",
+      "homepage": "https://github.com/ThomasBoom89/openweathermap-one-call-api",
       "role": "owner"
     }
   ],
