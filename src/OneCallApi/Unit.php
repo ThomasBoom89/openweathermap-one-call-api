@@ -4,50 +4,21 @@ declare(strict_types=1);
 
 namespace Thomasboom89\OpenWeatherMap\OneCallApi;
 
-class Unit
+enum Unit: string
 {
-    public const   MAP      = [self::DEFAULT => true, self::METRIC => true, self::IMPERIAL => true];
-
-    public const DEFAULT    = 'standard';
-    public const   METRIC   = 'metric';
-    public const   IMPERIAL = 'imperial';
-
-    private const  KNOWN_UNITS = [
-        self::DEFAULT  => [
-            'temperature' => 'K',
-            'speed'       => 'meter/sec'
-        ],
-        self::METRIC   => [
-            'temperature' => '°C',
-            'speed'       => 'meter/sec'
-        ],
-        self::IMPERIAL => [
-            'temperature' => '°F',
-            'speed'       => 'miles/hour'
-        ]
-    ];
-
-    private string $unit;
-
-    public function __construct(string $unit)
-    {
-        $this->unit = $unit;
-    }
-
-    public function get(): string
-    {
-        return $this->unit;
-    }
+    case Default = 'standard';
+    case Metric = 'metric';
+    case Imperial = 'imperial';
 
     public function getFromType(string $type): string
     {
         switch ($type) {
             case 'temperature':
-                return self::KNOWN_UNITS[$this->unit]['temperature'];
+                return $this->getUnitForTemperature();
 
             case 'speed':
             case 'gust':
-                return self::KNOWN_UNITS[$this->unit]['speed'];
+                return $this->getUnitForSpeed();
 
             case 'precipitation':
                 return 'mm';
@@ -66,5 +37,24 @@ class Unit
             case 'cloudiness':
                 return '%';
         }
+    }
+
+    private function getUnitForTemperature(): string
+    {
+
+        return match ($this) {
+            self::Default  => 'K',
+            self::Metric   => '°C',
+            self::Imperial => '°F'
+        };
+    }
+
+    private function getUnitForSpeed(): string
+    {
+
+        return match ($this) {
+            self::Default, self::Metric => 'meter/sec',
+            self::Imperial              => 'miles/hour'
+        };
     }
 }

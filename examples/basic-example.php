@@ -16,8 +16,8 @@ $pool        = new ArrayAdapter();
 $cache       = new Psr16Cache($pool);
 $owmoca      = new OneCallApi("YOUR-API-KEY", $httpClient, $httpFactory, $cache, 5);
 
-$forecast = $owmoca->getForecast(-78.944450, 19.458971, 'de', OneCallApi\Unit::METRIC);
-//$forecast = $owmoca->getForecast(232.512209, -167.045075, 'de', OneCallApi\Unit::METRIC);
+$forecast = $owmoca->getForecast(-78.944450, 19.458971, OneCallApi\Language::German, OneCallApi\Unit::Metric);
+//$forecast = $owmoca->getForecast(232.512209, -167.045075, OneCallApi\Language::German, OneCallApi\Unit::Metric);
 
 
 print_r($forecast->current->temperature);

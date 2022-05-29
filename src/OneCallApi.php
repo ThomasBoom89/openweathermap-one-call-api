@@ -12,8 +12,6 @@ use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Exceptions\BadResponse;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Exceptions\MalformedRequestBody;
-use Thomasboom89\OpenWeatherMap\OneCallApi\Exceptions\UnknownUnit;
-use Thomasboom89\OpenWeatherMap\OneCallApi\Exceptions\UnkownLanguage;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Factory;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Geocoordinates;
@@ -48,17 +46,20 @@ class OneCallApi
     }
 
     /**
-     * @throws UnkownLanguage
-     * @throws UnknownUnit
      * @throws MalformedRequestBody
      * @throws BadResponse
      * @throws ClientExceptionInterface
      * @throws InvalidArgumentException
      */
-    public function getForecast(float $lat, float $lon, string $language = 'en', string $unit = 'standard'): Forecast
-    {
+    public function getForecast(
+        float    $lat,
+        float    $lon,
+        Language $language = Language::English,
+        Unit     $unit = Unit::Default
+    ): Forecast {
+
         if ($this->cache !== null) {
-            $cacheKey   = $lat . $lon . $language . $unit;
+            $cacheKey   = $lat . $lon . $language->value . $unit->value;
             $cacheValue = $this->cache->get($cacheKey);
             if ($cacheValue !== null) {
                 return $cacheValue;
@@ -68,17 +69,7 @@ class OneCallApi
         $geocoordinates = new Geocoordinates($lat, $lon);
         $geocoordinates->normalize();
 
-        if (!array_key_exists($language, Language::MAP)) {
-            throw new UnkownLanguage($language . ' not known');
-        }
-        $languageValue = new Language($language);
-
-        if (!array_key_exists($unit, Unit::MAP)) {
-            throw new UnknownUnit($unit . ' not known');
-        }
-        $unitValue = new Unit($unit);
-
-        $url     = $this->buildUrl($geocoordinates, $languageValue, $unitValue);
+        $url     = $this->buildUrl($geocoordinates, $language, $unit);
         $request = $this->requestFactory->createRequest('GET', $url);
 
         $response = $this->httpClient->sendRequest($request);
@@ -93,7 +84,7 @@ class OneCallApi
             throw new MalformedRequestBody('json could not be decoded');
         }
 
-        $factory = new Factory($unitValue);
+        $factory = new Factory($unit);
 
         $forecast = $factory->createForecastBuilder()
                             ->build($rawResponse);
@@ -111,8 +102,8 @@ class OneCallApi
             'lat'   => $geocoordinates->getLat(),
             'lon'   => $geocoordinates->getLon(),
             'appid' => $this->apiKey,
-            'lang'  => $language->get(),
-            'units' => $unit->get()
+            'lang'  => $language->value,
+            'units' => $unit->value
         ];
 
         return 'https://api.openweathermap.org/data/2.5/onecall?' . http_build_query($queryParam);
