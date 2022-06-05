@@ -41,30 +41,15 @@ class Unit
 
     public function getFromType(string $type): string
     {
-        switch ($type) {
-            case 'temperature':
-                return self::KNOWN_UNITS[$this->unit]['temperature'];
-
-            case 'speed':
-            case 'gust':
-                return self::KNOWN_UNITS[$this->unit]['speed'];
-
-            case 'precipitation':
-                return 'mm';
-
-            case 'pressure':
-                return 'hPa';
-
-            case 'visibility':
-                return 'm';
-
-            case 'degree':
-                return '°';
-
-            case 'humidity':
-            case 'probability':
-            case 'cloudiness':
-                return '%';
-        }
+        return match ($type) {
+            'temperature'                           => self::KNOWN_UNITS[$this->unit]['temperature'],
+            'speed', 'gust'                         => self::KNOWN_UNITS[$this->unit]['speed'],
+            'precipitation'                         => 'mm',
+            'pressure'                              => 'hPa',
+            'visibility'                            => 'm',
+            'degree'                                => '°',
+            'humidity', 'probability', 'cloudiness' => '%',
+            default                                 => '',
+        };
     }
 }
