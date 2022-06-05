@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Openweathermap One Call Api.
+ *
+ * (c) ThomasBoom89 <51998416+ThomasBoom89@users.noreply.github.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
@@ -17,6 +26,9 @@ class Wind implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'wind_speed': float, 'wind_deg': int, 'wind_gust': float} $data
+     */
     public function build(array $data): WindValue
     {
         $wind                = new WindValue();

@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Openweathermap One Call Api.
+ *
+ * (c) ThomasBoom89 <51998416+ThomasBoom89@users.noreply.github.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Thomasboom89\OpenWeatherMap\OneCallApi;
@@ -41,30 +50,15 @@ class Unit
 
     public function getFromType(string $type): string
     {
-        switch ($type) {
-            case 'temperature':
-                return self::KNOWN_UNITS[$this->unit]['temperature'];
-
-            case 'speed':
-            case 'gust':
-                return self::KNOWN_UNITS[$this->unit]['speed'];
-
-            case 'precipitation':
-                return 'mm';
-
-            case 'pressure':
-                return 'hPa';
-
-            case 'visibility':
-                return 'm';
-
-            case 'degree':
-                return '°';
-
-            case 'humidity':
-            case 'probability':
-            case 'cloudiness':
-                return '%';
-        }
+        return match ($type) {
+            'temperature'                           => self::KNOWN_UNITS[$this->unit]['temperature'],
+            'speed', 'gust'                         => self::KNOWN_UNITS[$this->unit]['speed'],
+            'precipitation'                         => 'mm',
+            'pressure'                              => 'hPa',
+            'visibility'                            => 'm',
+            'degree'                                => '°',
+            'humidity', 'probability', 'cloudiness' => '%',
+            default                                 => '',
+        };
     }
 }

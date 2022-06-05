@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Openweathermap One Call Api.
+ *
+ * (c) ThomasBoom89 <51998416+ThomasBoom89@users.noreply.github.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Thomasboom89\OpenWeatherMap\OneCallApi;
@@ -31,6 +40,9 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder\UVIndex;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder\Visibility;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder\Wind;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class Factory
 {
     private Unit $unit;
@@ -51,17 +63,17 @@ class Factory
         );
     }
 
-    public function createMinutelyBuilder(): Minutely
+    private function createMinutelyBuilder(): Minutely
     {
         return new Minutely(new Minute(new Precipitation($this->unit)));
     }
 
-    public function createAlertsBuilder(): Alerts
+    private function createAlertsBuilder(): Alerts
     {
         return new Alerts(new Alert());
     }
 
-    public function createCurrentBuilder(): Current
+    private function createCurrentBuilder(): Current
     {
         return new Current(
             $this->createSunBuilder(),
@@ -80,7 +92,7 @@ class Factory
         );
     }
 
-    public function createHourBuilder(): Hour
+    private function createHourBuilder(): Hour
     {
         return new Hour(
             $this->createTemperatureBuilder(),
@@ -99,12 +111,12 @@ class Factory
         );
     }
 
-    public function createHourlyBuilder(): Hourly
+    private function createHourlyBuilder(): Hourly
     {
         return new Hourly($this->createHourBuilder());
     }
 
-    public function createDayBuilder(): Day
+    private function createDayBuilder(): Day
     {
         return new Day(
             $this->createSunBuilder(),
@@ -124,87 +136,87 @@ class Factory
         );
     }
 
-    public function createDailyBuilder(): Daily
+    private function createDailyBuilder(): Daily
     {
         return new Daily($this->createDayBuilder());
     }
 
-    public function createTemperatureBuilder(): Temperature
+    private function createTemperatureBuilder(): Temperature
     {
         return new Temperature($this->unit);
     }
 
-    public function createDailyTemperatureBuilder(): Forecast\Builder\Daily\Temperature
+    private function createDailyTemperatureBuilder(): Forecast\Builder\Daily\Temperature
     {
         return new Forecast\Builder\Daily\Temperature($this->unit);
     }
 
-    public function createFeelsLikeBuilder(): FeelsLike
+    private function createFeelsLikeBuilder(): FeelsLike
     {
         return new FeelsLike($this->unit);
     }
 
-    public function createDailyFeelsLikeBuilder(): Forecast\Builder\Daily\FeelsLike
+    private function createDailyFeelsLikeBuilder(): Forecast\Builder\Daily\FeelsLike
     {
         return new Forecast\Builder\Daily\FeelsLike($this->unit);
     }
 
-    public function createPressureBuilder(): Pressure
+    private function createPressureBuilder(): Pressure
     {
         return new Pressure($this->unit);
     }
 
-    public function createHumidityBuilder(): Humidity
+    private function createHumidityBuilder(): Humidity
     {
         return new Humidity($this->unit);
     }
 
-    public function createDewPointBuilder(): DewPoint
+    private function createDewPointBuilder(): DewPoint
     {
         return new DewPoint($this->unit);
     }
 
-    public function createUVIndexBuilder(): UVIndex
+    private function createUVIndexBuilder(): UVIndex
     {
         return new UVIndex();
     }
 
-    public function createCloudinessBuilder(): Cloudiness
+    private function createCloudinessBuilder(): Cloudiness
     {
         return new Cloudiness($this->unit);
     }
 
-    public function createVisibilityBuilder(): Visibility
+    private function createVisibilityBuilder(): Visibility
     {
         return new Visibility($this->unit);
     }
 
-    public function createWindBuilder(): Wind
+    private function createWindBuilder(): Wind
     {
         return new Wind($this->unit);
     }
 
-    public function createRainBuilder(): Rain
+    private function createRainBuilder(): Rain
     {
         return new Rain($this->unit);
     }
 
-    public function createSnowBuilder(): Snow
+    private function createSnowBuilder(): Snow
     {
         return new Snow($this->unit);
     }
 
-    public function createConditionBuilder(): Condition
+    private function createConditionBuilder(): Condition
     {
         return new Condition();
     }
 
-    public function createSunBuilder(): Sun
+    private function createSunBuilder(): Sun
     {
         return new Sun();
     }
 
-    public function createProbabilityBuilder(): Probability
+    private function createProbabilityBuilder(): Probability
     {
         return new Probability($this->unit);
     }

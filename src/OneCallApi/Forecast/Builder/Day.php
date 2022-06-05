@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of Openweathermap One Call Api.
+ *
+ * (c) ThomasBoom89 <51998416+ThomasBoom89@users.noreply.github.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 declare(strict_types=1);
 
 namespace Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
@@ -8,6 +17,10 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Daily\Day as DayValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Timezone\Calculator;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ */
 class Day implements Builder
 {
     use Calculator;
@@ -59,6 +72,46 @@ class Day implements Builder
         $this->uvIndex     = $uvIndex;
     }
 
+    /**
+     * @noinspection PhpDocSignatureInspection
+     * @param array{
+     *      'timezone_offset' : int,
+     *      'dt' : int,
+     *      'sunrise'? : int, 'sunset'? : int,
+     *      'moonrise'? : int, 'moonset'? : int, 'moon_phase' : int,
+     *      'temp' : array{
+     *          'morn': float,
+     *          'day': float,
+     *          'eve': float,
+     *          'night': float,
+     *          'min': float,
+     *          'max': float
+     *      },
+     *      'feels_like' : array{
+     *          'morn': float,
+     *          'day': float,
+     *          'eve': float,
+     *          'night': float
+     *      },
+     *      'pressure': int,
+     *      'humidity': int,
+     *      'dew_point': float,
+     *      'uvi' : float,
+     *      'clouds': int,
+     *      'wind_speed': float, 'wind_deg': int, 'wind_gust': float,
+     *      'rain'?: float|array{'1h': float},
+     *      'snow'?: float|array{'1h': float},
+     *      'weather': array{
+     *          array{
+     *              'id': int,
+     *              'main': string,
+     *              'description': string,
+     *              'icon': string
+     *          }
+     *      },
+     *      'pop': float
+     * } $data
+     */
     public function build(array $data): DayValue
     {
         $day              = new DayValue();
