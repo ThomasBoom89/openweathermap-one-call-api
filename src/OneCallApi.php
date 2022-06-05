@@ -20,6 +20,9 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Geocoordinates;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Language;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class OneCallApi
 {
     private string $apiKey;

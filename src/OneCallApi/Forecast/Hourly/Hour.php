@@ -18,6 +18,9 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\UVIndex;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Visibility;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Wind;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class Hour
 {
     public DateTime    $dateTime;

@@ -6,7 +6,7 @@ namespace Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value;
 
 class Condition
 {
-    public int    $id;
+    public int    $identifier;
     public string $main;
     public string $description;
     public string $icon;

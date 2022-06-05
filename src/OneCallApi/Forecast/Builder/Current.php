@@ -8,6 +8,10 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Current as CurrentValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Timezone\Calculator;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ */
 class Current implements Builder
 {
     use Calculator;

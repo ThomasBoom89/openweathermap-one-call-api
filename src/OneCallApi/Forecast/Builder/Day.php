@@ -8,6 +8,10 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Daily\Day as DayValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Timezone\Calculator;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ */
 class Day implements Builder
 {
     use Calculator;

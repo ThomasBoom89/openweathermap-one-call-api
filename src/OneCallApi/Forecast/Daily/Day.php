@@ -20,6 +20,9 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Sun;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\UVIndex;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Wind;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ */
 class Day
 {
     public DateTime    $dateTime;

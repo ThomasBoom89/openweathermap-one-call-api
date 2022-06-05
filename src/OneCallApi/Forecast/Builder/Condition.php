@@ -13,7 +13,7 @@ class Condition implements Builder
     {
         $weather                = $data['weather'][0];
         $condition              = new ConditionValue();
-        $condition->id          = $weather['id'];
+        $condition->identifier  = $weather['id'];
         $condition->main        = $weather['main'];
         $condition->description = $weather['description'];
         $condition->icon        = $weather['icon'];

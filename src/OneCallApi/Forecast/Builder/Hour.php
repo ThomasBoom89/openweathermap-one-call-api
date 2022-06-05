@@ -8,6 +8,10 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Hourly\Hour as HourValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Timezone\Calculator;
 
+/**
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ */
 class Hour implements Builder
 {
     use Calculator;
