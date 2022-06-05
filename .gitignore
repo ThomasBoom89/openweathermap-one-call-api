@@ -1,4 +1,5 @@
 /vendor/
 .phpunit.result.cache
 .idea
-/src/ApiKey.php
+/examples/ApiKey.php
+.php-cs-fixer.cache
