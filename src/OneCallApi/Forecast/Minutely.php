@@ -7,6 +7,9 @@ namespace Thomasboom89\OpenWeatherMap\OneCallApi\Forecast;
 use ArrayIterator;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Minutely\Minute;
 
+/**
+ * @extends ArrayIterator<int, Minute>
+ */
 class Minutely extends ArrayIterator
 {
     public function current(): Minute

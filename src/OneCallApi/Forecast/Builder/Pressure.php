@@ -17,6 +17,9 @@ class Pressure implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'pressure': int} $data
+     */
     public function build(array $data): PressureValue
     {
         $pressure        = new PressureValue();

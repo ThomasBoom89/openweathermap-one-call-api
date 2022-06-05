@@ -14,6 +14,6 @@ class Alert
     public DateTime $end;
     public string   $description;
 
-    /** var string[]  */
+    /** @var string[] */
     public array $tags;
 }

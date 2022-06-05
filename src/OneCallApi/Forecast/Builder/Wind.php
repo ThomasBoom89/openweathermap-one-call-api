@@ -17,6 +17,9 @@ class Wind implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'wind_speed': float, 'wind_deg': int, 'wind_gust': float} $data
+     */
     public function build(array $data): WindValue
     {
         $wind                = new WindValue();

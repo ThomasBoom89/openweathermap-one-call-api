@@ -17,6 +17,9 @@ class Visibility implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'visibility' : int} $data
+     */
     public function build(array $data): VisibilityValue
     {
         $visibility        = new VisibilityValue();

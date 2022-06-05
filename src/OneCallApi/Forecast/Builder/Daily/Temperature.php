@@ -17,6 +17,18 @@ class Temperature implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{
+     *     'temp': array{
+     *          'morn': float,
+     *          'day': float,
+     *          'eve': float,
+     *          'night': float,
+     *          'min': float,
+     *          'max': float
+     *      }
+     * } $data
+     */
     public function build(array $data): TemperatureValue
     {
         $temperatureData      = $data['temp'];

@@ -17,6 +17,9 @@ class Rain implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'rain'?: float|array{'1h': float}} $data
+     */
     public function build(array $data): RainValue
     {
         $rain  = new RainValue();

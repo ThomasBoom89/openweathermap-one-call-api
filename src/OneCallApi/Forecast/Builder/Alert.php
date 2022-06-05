@@ -12,6 +12,17 @@ class Alert implements Builder
 {
     use Calculator;
 
+    /**
+     * @param array{
+     *     'sender_name': string,
+     *     'event': string,
+     *     'start': int,
+     *     'end': int,
+     *     'timezone_offset': int,
+     *     'description': string,
+     *     'tags': string[]
+     * } $data
+     */
     public function build(array $data): AlertValue
     {
         $alert              = new AlertValue();

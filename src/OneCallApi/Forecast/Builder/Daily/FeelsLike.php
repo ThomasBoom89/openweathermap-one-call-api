@@ -17,6 +17,16 @@ class FeelsLike implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{
+     *     'feels_like': array{
+     *          'morn': float,
+     *          'day': float,
+     *          'eve': float,
+     *          'night': float
+     *      }
+     * } $data
+     */
     public function build(array $data): FeelsLikeValue
     {
         $feelsLikeData      = $data['feels_like'];

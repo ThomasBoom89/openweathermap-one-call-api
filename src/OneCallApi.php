@@ -8,6 +8,7 @@ use JsonException;
 use Psr\Http\Client\ClientExceptionInterface;
 use Psr\Http\Client\ClientInterface;
 use Psr\Http\Message\RequestFactoryInterface;
+use Psr\Http\Message\ResponseInterface;
 use Psr\SimpleCache\CacheInterface;
 use Psr\SimpleCache\InvalidArgumentException;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Exceptions\BadResponse;
@@ -22,6 +23,7 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
+ * @phpstan-import-type ForecastArray from Forecast\Builder\Forecast
  */
 class OneCallApi
 {
@@ -62,7 +64,7 @@ class OneCallApi
         if ($this->cache !== null) {
             $cacheKey   = $lat . $lon . $language . $unit;
             $cacheValue = $this->cache->get($cacheKey);
-            if ($cacheValue !== null) {
+            if ($cacheValue instanceof Forecast) {
                 return $cacheValue;
             }
         }
@@ -89,11 +91,7 @@ class OneCallApi
             throw new BadResponse($response->getStatusCode() . $response->getReasonPhrase());
         }
 
-        try {
-            $rawResponse = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
-        } catch (JsonException) {
-            throw new MalformedRequestBody('json could not be decoded');
-        }
+        $rawResponse = $this->getRawResponse($response);
 
         $factory = new Factory($unitValue);
 
@@ -118,5 +116,24 @@ class OneCallApi
         ];
 
         return 'https://api.openweathermap.org/data/2.5/onecall?' . http_build_query($queryParam);
+    }
+
+    /**
+     * @return ForecastArray
+     * @throws MalformedRequestBody
+     */
+    public function getRawResponse(ResponseInterface $response): array
+    {
+        try {
+            $rawResponse = json_decode((string)$response->getBody(), true, 512, JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            throw new MalformedRequestBody('json could not be decoded');
+        }
+
+        if (!is_array($rawResponse)) {
+            throw new MalformedRequestBody('no json given');
+        }
+
+        return $rawResponse;// @phpstan-ignore-line
     }
 }

@@ -17,6 +17,9 @@ class Snow implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'snow'?: float|array{'1h': float}} $data
+     */
     public function build(array $data): SnowValue
     {
         $snow  = new SnowValue();

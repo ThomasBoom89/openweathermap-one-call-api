@@ -60,6 +60,32 @@ class Hour implements Builder
         $this->probability = $probability;
     }
 
+    /**
+     * @noinspection PhpDocSignatureInspection
+     * @param array{
+     *      'dt' : int, 'timezone_offset' : int,
+     *      'temp' : float,
+     *      'feels_like' : float,
+     *      'pressure': int,
+     *      'humidity': int,
+     *      'dew_point': float,
+     *      'uvi' : float,
+     *      'clouds': int,
+     *      'visibility' : int,
+     *      'wind_speed': float, 'wind_deg': int, 'wind_gust': float,
+     *      'rain'?: float|array{'1h': float},
+     *      'snow'?: float|array{'1h': float},
+     *       'weather': array{
+     *          array{
+     *              'id': int,
+     *              'main': string,
+     *              'description': string,
+     *              'icon': string
+     *          }
+     *      },
+     *      'pop': float
+     * } $data
+     */
     public function build(array $data): HourValue
     {
         $hour              = new HourValue();

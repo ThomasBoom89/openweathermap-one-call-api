@@ -17,11 +17,14 @@ class Temperature implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'temp' : float} $data
+     */
     public function build(array $data): TemperatureValue
     {
-        $temperature = new TemperatureValue();
+        $temperature        = new TemperatureValue();
         $temperature->value = $data['temp'];
-        $temperature->unit = $this->unit->getFromType('temperature');
+        $temperature->unit  = $this->unit->getFromType('temperature');
 
         return $temperature;
     }

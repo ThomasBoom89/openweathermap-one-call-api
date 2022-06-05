@@ -17,6 +17,9 @@ class Cloudiness implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'clouds': int} $data
+     */
     public function build(array $data): CloudinessValue
     {
         $cloudiness        = new CloudinessValue();

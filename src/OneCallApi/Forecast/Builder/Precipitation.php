@@ -17,6 +17,9 @@ class Precipitation implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'precipitation': float} $data
+     */
     public function build(array $data): PrecipitationValue
     {
         $precipitation        = new PrecipitationValue();

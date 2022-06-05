@@ -7,6 +7,21 @@ namespace Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast as ForecastValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 
+/**
+ * @phpstan-import-type CurrentArray from Current
+ * @phpstan-import-type MinutelyArray from Minutely
+ * @phpstan-import-type HourlyArray from Hourly
+ * @phpstan-import-type DailyArray from Daily
+ * @phpstan-import-type AlertsArray from Alerts
+ * @phpstan-type ForecastArray array{
+ *     'timezone_offset' : int,
+ *     'current' : CurrentArray,
+ *     'minutely'? : MinutelyArray,
+ *     'hourly' : HourlyArray,
+ *     'daily' : DailyArray,
+ *     'alerts'? : AlertsArray
+ * }
+ */
 class Forecast implements Builder
 {
     private Current  $current;
@@ -24,31 +39,33 @@ class Forecast implements Builder
         $this->alerts   = $alerts;
     }
 
+    /**
+     * @noinspection PhpDocSignatureInspection
+     * @param ForecastArray $data
+     */
     public function build(array $data): ForecastValue
     {
+        $timezone = $data['timezone_offset'];
         $forecast = new ForecastValue();
 
         $currentData                    = $data['current'];
-        $currentData['timezone_offset'] = $data['timezone_offset'];
+        $currentData['timezone_offset'] = $timezone;
         $forecast->current              = $this->current->build($currentData);
 
-        $minutelyData                    = $data['minutely'] ?? [];
-        $minutelyData['timezone_offset'] = $data['timezone_offset'];
-        $forecast->minutely              = $this->minutely->build($minutelyData);
+        $minutelyData = $data['minutely'] ?? [];
+        $this->minutely->setTimezone($timezone);
+        $forecast->minutely = $this->minutely->build($minutelyData);
 
-        $hourlyData                    = $data['hourly'];
-        $hourlyData['timezone_offset'] = $data['timezone_offset'];
-        $forecast->hourly              = $this->hourly->build($hourlyData);
+        $this->hourly->setTimezone($timezone);
+        $forecast->hourly = $this->hourly->build($data['hourly']);
 
-        $dailyData                    = $data['daily'];
-        $dailyData['timezone_offset'] = $data['timezone_offset'];
-        $forecast->daily              = $this->daily->build($dailyData);
+        $this->daily->setTimezone($timezone);
+        $forecast->daily = $this->daily->build($data['daily']);
 
         $forecast->alerts = new ForecastValue\Alerts();
         if (array_key_exists('alerts', $data)) {
-            $alertsData                    = $data['alerts'];
-            $alertsData['timezone_offset'] = $data['timezone_offset'];
-            $forecast->alerts              = $this->alerts->build($alertsData);
+            $this->alerts->setTimezone($timezone);
+            $forecast->alerts = $this->alerts->build($data['alerts']);
         }
 
         return $forecast;

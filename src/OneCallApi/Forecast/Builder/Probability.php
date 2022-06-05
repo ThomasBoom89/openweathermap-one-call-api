@@ -17,6 +17,9 @@ class Probability implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'pop': float} $data
+     */
     public function build(array $data): ProbabilityValue
     {
         $probability        = new ProbabilityValue();

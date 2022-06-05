@@ -17,6 +17,9 @@ class DewPoint implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'dew_point': float} $data
+     */
     public function build(array $data): DewPointValue
     {
         $dewPoint        = new DewPointValue();

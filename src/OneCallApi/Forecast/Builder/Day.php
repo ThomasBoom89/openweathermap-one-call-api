@@ -63,6 +63,46 @@ class Day implements Builder
         $this->uvIndex     = $uvIndex;
     }
 
+    /**
+     * @noinspection PhpDocSignatureInspection
+     * @param array{
+     *      'timezone_offset' : int,
+     *      'dt' : int,
+     *      'sunrise'? : int, 'sunset'? : int,
+     *      'moonrise'? : int, 'moonset'? : int, 'moon_phase' : int,
+     *      'temp' : array{
+     *          'morn': float,
+     *          'day': float,
+     *          'eve': float,
+     *          'night': float,
+     *          'min': float,
+     *          'max': float
+     *      },
+     *      'feels_like' : array{
+     *          'morn': float,
+     *          'day': float,
+     *          'eve': float,
+     *          'night': float
+     *      },
+     *      'pressure': int,
+     *      'humidity': int,
+     *      'dew_point': float,
+     *      'uvi' : float,
+     *      'clouds': int,
+     *      'wind_speed': float, 'wind_deg': int, 'wind_gust': float,
+     *      'rain'?: float|array{'1h': float},
+     *      'snow'?: float|array{'1h': float},
+     *      'weather': array{
+     *          array{
+     *              'id': int,
+     *              'main': string,
+     *              'description': string,
+     *              'icon': string
+     *          }
+     *      },
+     *      'pop': float
+     * } $data
+     */
     public function build(array $data): DayValue
     {
         $day              = new DayValue();

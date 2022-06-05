@@ -11,6 +11,30 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Timezone\Calculator;
 /**
  * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  * @SuppressWarnings(PHPMD.ExcessiveParameterList)
+ * @phpstan-type CurrentArray array{
+ *      'timezone_offset' : int,
+ *      'dt' : int,
+ *      'sunrise'? : int, 'sunset'? : int,
+ *      'temp' : float,
+ *      'feels_like' : float,
+ *      'pressure': int,
+ *      'humidity': int,
+ *      'dew_point': float,
+ *      'uvi' : float,
+ *      'clouds': int,
+ *      'visibility' : int,
+ *      'wind_speed': float, 'wind_deg': int, 'wind_gust': float,
+ *      'rain'?: float|array{'1h': float},
+ *      'snow'?: float|array{'1h': float},
+ *      'weather': array{
+ *          array{
+ *              'id': int,
+ *              'main': string,
+ *              'description': string,
+ *              'icon': string
+ *          }
+ *      }
+ * }
  */
 class Current implements Builder
 {
@@ -60,6 +84,10 @@ class Current implements Builder
         $this->condition   = $condition;
     }
 
+    /**
+     * @noinspection PhpDocSignatureInspection
+     * @param CurrentArray $data
+     */
     public function build(array $data): CurrentValue
     {
         $current              = new CurrentValue();

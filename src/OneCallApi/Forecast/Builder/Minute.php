@@ -19,6 +19,9 @@ class Minute implements Builder
         $this->precipitation = $precipitation;
     }
 
+    /**
+     * @param array{'dt': int, 'timezone_offset': int, 'precipitation': float} $data
+     */
     public function build(array $data): MinuteValue
     {
         $minute                = new MinuteValue();

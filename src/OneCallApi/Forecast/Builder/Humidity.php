@@ -17,6 +17,9 @@ class Humidity implements Builder
         $this->unit = $unit;
     }
 
+    /**
+     * @param array{'humidity': int} $data
+     */
     public function build(array $data): HumidityValue
     {
         $humidity        = new HumidityValue();

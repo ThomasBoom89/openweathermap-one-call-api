@@ -12,6 +12,9 @@ class Moon implements Builder
 {
     use Calculator;
 
+    /**
+     * @param array{'moonrise'? : int, 'moonset'? : int, 'moon_phase': int, 'timezone_offset': int} $data
+     */
     public function build(array $data): ?MoonValue
     {
         if (!array_key_exists('moonrise', $data)
