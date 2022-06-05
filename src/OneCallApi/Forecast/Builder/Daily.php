@@ -9,7 +9,6 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Daily as DailyValue;
 
 class Daily implements Builder
 {
-
     private Day $day;
 
     public function __construct(Day $day)

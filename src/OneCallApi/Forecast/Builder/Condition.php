@@ -9,7 +9,6 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Condition as Condition
 
 class Condition implements Builder
 {
-
     public function build(array $data): ConditionValue
     {
         $weather                = $data['weather'][0];

@@ -10,7 +10,6 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
 class FeelsLike implements Builder
 {
-
     private Unit $unit;
 
     public function __construct(Unit $unit)

@@ -22,7 +22,6 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
 class OneCallApi
 {
-
     private string $apiKey;
 
     private ClientInterface $httpClient;

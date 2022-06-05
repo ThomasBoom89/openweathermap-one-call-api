@@ -9,7 +9,6 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\UVIndex as UVIndexValu
 
 class UVIndex implements Builder
 {
-
     public function build(array $data): UVIndexValue
     {
         $uvIndex        = new UVIndexValue();
