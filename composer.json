@@ -29,6 +29,6 @@
     "phpunit/phpunit": "9.5.*",
     "guzzlehttp/guzzle": "7.*",
     "php-http/mock-client": "^1.5.0",
-    "symfony/cache": "6.0.*"
+    "symfony/cache": "6.2.*"
   }
 }
