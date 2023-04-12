@@ -114,19 +114,6 @@ class OneCallApi
         return $forecast;
     }
 
-    private function buildUrl(Geocoordinates $geocoordinates, Language $language, Unit $unit): string
-    {
-        $queryParam = [
-            'lat'   => $geocoordinates->getLat(),
-            'lon'   => $geocoordinates->getLon(),
-            'appid' => $this->apiKey,
-            'lang'  => $language->get(),
-            'units' => $unit->get()
-        ];
-
-        return 'https://api.openweathermap.org/data/2.5/onecall?' . http_build_query($queryParam);
-    }
-
     /**
      * @return ForecastArray
      * @throws MalformedRequestBody
@@ -142,7 +129,20 @@ class OneCallApi
         if (!is_array($rawResponse)) {
             throw new MalformedRequestBody('no json given');
         }
+        /** @var ForecastArray */
+        return $rawResponse;
+    }
 
-        return $rawResponse;// @phpstan-ignore-line
+    private function buildUrl(Geocoordinates $geocoordinates, Language $language, Unit $unit): string
+    {
+        $queryParam = [
+            'lat'   => $geocoordinates->getLat(),
+            'lon'   => $geocoordinates->getLon(),
+            'appid' => $this->apiKey,
+            'lang'  => $language->get(),
+            'units' => $unit->get()
+        ];
+
+        return 'https://api.openweathermap.org/data/2.5/onecall?' . http_build_query($queryParam);
     }
 }

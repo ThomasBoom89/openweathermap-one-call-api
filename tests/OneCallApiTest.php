@@ -34,7 +34,6 @@ class OneCallApiTest extends TestCase
 
         // for cache coverage
         $owmoca->getForecast(232.512209, -267.045075, 'de', OneCallApi\Unit::METRIC);
-
     }
 
     public function testGetForecastUnknownLanguage(): void

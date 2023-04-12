@@ -15,10 +15,10 @@ namespace Thomasboom89\OpenWeatherMap\OneCallApi;
 
 class Geocoordinates
 {
-    private float $lat;
-    private float $lon;
     private const LAT_LIMIT = 90;
     private const LON_LIMIT = 180;
+    private float $lat;
+    private float $lon;
 
     public function __construct(float $lat, float $lon)
     {
