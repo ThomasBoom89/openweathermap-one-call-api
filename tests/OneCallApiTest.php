@@ -16,7 +16,7 @@ class OneCallApiTest extends TestCase
     {
         $owmoca = $this->createOneCallApiMock($this->getValidMockBody());
 
-        $forecast = $owmoca->getForecast(232.512209, -267.045075, 'de', OneCallApi\Unit::METRIC);
+        $forecast = $owmoca->getForecast(232.512209, -267.045075, OneCallApi\Language::German, OneCallApi\Unit::Metric);
 
         $this->assertEquals('0.17mm', $forecast->current->rain);
         $this->assertEquals('0.17mm', $forecast->current->snow);
@@ -33,23 +33,7 @@ class OneCallApiTest extends TestCase
         $this->assertEquals('wind gusts', $forecast->alerts->current()->event);
 
         // for cache coverage
-        $owmoca->getForecast(232.512209, -267.045075, 'de', OneCallApi\Unit::METRIC);
-    }
-
-    public function testGetForecastUnknownLanguage(): void
-    {
-        $owmoca = $this->createOneCallApiMock($this->getValidMockBody());
-
-        $this->expectException(OneCallApi\Exceptions\UnkownLanguage::class);
-        $owmoca->getForecast(232.512209, -267.045075, 'zzui', OneCallApi\Unit::METRIC);
-    }
-
-    public function testGetForecastUnknownUnit(): void
-    {
-        $owmoca = $this->createOneCallApiMock($this->getValidMockBody());
-
-        $this->expectException(OneCallApi\Exceptions\UnknownUnit::class);
-        $owmoca->getForecast(232.512209, -267.045075, 'de', 'wrong');
+        $owmoca->getForecast(232.512209, -267.045075, OneCallApi\Language::German, OneCallApi\Unit::Metric);
     }
 
     public function testGetForecastBadResponse(): void
@@ -57,7 +41,7 @@ class OneCallApiTest extends TestCase
         $owmoca = $this->createOneCallApiMock('', 401);
 
         $this->expectException(OneCallApi\Exceptions\BadResponse::class);
-        $owmoca->getForecast(232.512209, -267.045075, 'de', OneCallApi\Unit::METRIC);
+        $owmoca->getForecast(232.512209, -267.045075, OneCallApi\Language::German, OneCallApi\Unit::Metric);
     }
 
     public function testGetForecastMalformedRequestBody(): void
@@ -65,7 +49,7 @@ class OneCallApiTest extends TestCase
         $owmoca = $this->createOneCallApiMock($this->getInvalidMockBody());
 
         $this->expectException(OneCallApi\Exceptions\MalformedRequestBody::class);
-        $owmoca->getForecast(232.512209, -267.045075, 'de', OneCallApi\Unit::METRIC);
+        $owmoca->getForecast(232.512209, -267.045075, OneCallApi\Language::German, OneCallApi\Unit::Metric);
     }
 
     public function testGetForecastMalformedRequestBodyNull(): void
@@ -73,7 +57,7 @@ class OneCallApiTest extends TestCase
         $owmoca = $this->createOneCallApiMock($this->getNullMockBody());
 
         $this->expectException(OneCallApi\Exceptions\MalformedRequestBody::class);
-        $owmoca->getForecast(232.512209, -267.045075, 'de', OneCallApi\Unit::METRIC);
+        $owmoca->getForecast(232.512209, -267.045075, OneCallApi\Language::German, OneCallApi\Unit::Metric);
     }
 
     private function getValidMockBody(): string

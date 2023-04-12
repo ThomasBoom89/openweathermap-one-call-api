@@ -40,7 +40,7 @@ Now you can use it to make a request
 ```php
 // lat , lon , language , unitsystem
 try {
-    $forecast = $owmoca->getForecast(-78.944450, 19.458971, 'de', OneCallApi\Unit::METRIC);
+    $forecast = $owmoca->getForecast(-78.944450, 19.458971, OneCallApi\Language::German, OneCallApi\Unit::Metric);
  } catch (Exception $exception){
     // handle exception
  }
@@ -55,16 +55,16 @@ var_dump($forecast);
 ## FAQ
 
 Q: Which language is currently supported? \
-A: See src/OneCallApi/Language.php::MAP \
+A: You have to use Enum Thomasboom89\OpenWeatherMap\OneCallApi\Language \
 (If a language is missing, please open an issue)
 
 Q: Which unitsystem is currently supported? \
-A: See src/OneCallApi/Unit.php::MAP
+A: You have to use Enum Thomasboom89\OpenWeatherMap\OneCallApi\Unit \
 
 ## License
 
 Openweathermap One Call API
-Copyright (C) 2022 ThomasBoom89. MIT license.
+Copyright (C) 2023 ThomasBoom89. MIT license.
 
 Openweathermap One Call API includes several third-party Open-Source libraries, which are licensed under their
 own respective Open-Source licenses.
