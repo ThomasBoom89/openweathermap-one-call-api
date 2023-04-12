@@ -70,8 +70,8 @@ class OneCallApi
      */
     public function getForecast(float $lat, float $lon, string $language = 'en', string $unit = 'standard'): Forecast
     {
+        $cacheKey = $lat . $lon . $language . $unit;
         if ($this->cache !== null) {
-            $cacheKey   = $lat . $lon . $language . $unit;
             $cacheValue = $this->cache->get($cacheKey);
             if ($cacheValue instanceof Forecast) {
                 return $cacheValue;
@@ -107,7 +107,7 @@ class OneCallApi
         $forecast = $factory->createForecastBuilder()
                             ->build($rawResponse);
 
-        if ($this->cache !== null && isset($cacheKey)) {
+        if ($this->cache !== null) {
             $this->cache->set($cacheKey, $forecast, $this->cacheTTL);
         }
 
