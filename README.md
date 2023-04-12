@@ -1,6 +1,6 @@
 # Openweathermap One Call API
 
-![PHP](https://img.shields.io/badge/php-%3E%3D8.0-%238892BF?style=plastic&logo=php)
+![PHP](https://img.shields.io/badge/php-%3E%3D8.1-%238892BF?style=plastic&logo=php)
 ![License](https://img.shields.io/badge/license-MIT-green?style=plastic)
 
 A wrapper for Openweathermap One Call Api v1 -> [Link](https://openweathermap.org/api/one-call-api).
@@ -12,7 +12,7 @@ You need to get an api-key from their site to use the api.
 
 ## Requirement
 
-You need a working environment with php <= 8.0 and composer.
+You need a working environment with php >= 8.1 and composer.
 
 ## Installation
 

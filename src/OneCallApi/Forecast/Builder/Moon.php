@@ -26,7 +26,8 @@ class Moon implements Builder
      */
     public function build(array $data): ?MoonValue
     {
-        if (!array_key_exists('moonrise', $data)
+        if (
+            !array_key_exists('moonrise', $data)
             || !array_key_exists('moonset', $data)
             || $data['moonrise'] === 0
             || $data['moonset'] === 0

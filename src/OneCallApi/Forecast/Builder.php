@@ -17,5 +17,5 @@ interface Builder
      * @param mixed[] $data
      * @return mixed
      */
-    public function build(array $data);
+    public function build(array $data): mixed;
 }

@@ -17,6 +17,12 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Snow as SnowValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
+use function array_key_exists;
+
+/**
+ * @phpstan-type BuildDataVariantOne array{'snow'?: float}
+ * @phpstan-type BuildDataVariantTwo array{'snow'?: array{'1h': float}}
+ */
 class Snow implements Builder
 {
     private Unit $unit;
@@ -27,14 +33,14 @@ class Snow implements Builder
     }
 
     /**
-     * @param array{'snow'?: float|array{'1h': float}} $data
+     * @param array<BuildDataVariantOne|BuildDataVariantTwo> $data
      */
     public function build(array $data): SnowValue
     {
         $snow  = new SnowValue();
         $value = $data['snow'] ?? 0.0;
-        if (is_array($value)) {
-            $value = $value['1h'];
+        if (array_key_exists('1h', $data['snow'])) {
+            $value = $data['snow']['1h'];
         }
         $snow->value = $value;
         $snow->unit  = $this->unit->getFromType('precipitation');

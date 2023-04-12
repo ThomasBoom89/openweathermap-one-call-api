@@ -70,8 +70,8 @@ class OneCallApi
      */
     public function getForecast(float $lat, float $lon, string $language = 'en', string $unit = 'standard'): Forecast
     {
+        $cacheKey = $lat . $lon . $language . $unit;
         if ($this->cache !== null) {
-            $cacheKey   = $lat . $lon . $language . $unit;
             $cacheValue = $this->cache->get($cacheKey);
             if ($cacheValue instanceof Forecast) {
                 return $cacheValue;
@@ -107,24 +107,11 @@ class OneCallApi
         $forecast = $factory->createForecastBuilder()
                             ->build($rawResponse);
 
-        if ($this->cache !== null && isset($cacheKey)) {
+        if ($this->cache !== null) {
             $this->cache->set($cacheKey, $forecast, $this->cacheTTL);
         }
 
         return $forecast;
-    }
-
-    private function buildUrl(Geocoordinates $geocoordinates, Language $language, Unit $unit): string
-    {
-        $queryParam = [
-            'lat'   => $geocoordinates->getLat(),
-            'lon'   => $geocoordinates->getLon(),
-            'appid' => $this->apiKey,
-            'lang'  => $language->get(),
-            'units' => $unit->get()
-        ];
-
-        return 'https://api.openweathermap.org/data/2.5/onecall?' . http_build_query($queryParam);
     }
 
     /**
@@ -142,7 +129,20 @@ class OneCallApi
         if (!is_array($rawResponse)) {
             throw new MalformedRequestBody('no json given');
         }
+        /** @var ForecastArray */
+        return $rawResponse;
+    }
 
-        return $rawResponse;// @phpstan-ignore-line
+    private function buildUrl(Geocoordinates $geocoordinates, Language $language, Unit $unit): string
+    {
+        $queryParam = [
+            'lat'   => $geocoordinates->getLat(),
+            'lon'   => $geocoordinates->getLon(),
+            'appid' => $this->apiKey,
+            'lang'  => $language->get(),
+            'units' => $unit->get()
+        ];
+
+        return 'https://api.openweathermap.org/data/2.5/onecall?' . http_build_query($queryParam);
     }
 }

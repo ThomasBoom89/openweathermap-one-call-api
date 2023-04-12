@@ -26,7 +26,8 @@ class Sun implements Builder
      */
     public function build(array $data): ?SunValue
     {
-        if (!array_key_exists('sunrise', $data)
+        if (
+            !array_key_exists('sunrise', $data)
             || !array_key_exists('sunset', $data)
             || $data['sunrise'] === 0
             || $data['sunset'] === 0

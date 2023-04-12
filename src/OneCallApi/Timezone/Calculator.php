@@ -15,19 +15,28 @@ namespace Thomasboom89\OpenWeatherMap\OneCallApi\Timezone;
 
 use DateTime;
 use DateTimeZone;
+use Exception;
 
 trait Calculator
 {
+    /**
+     * @throws Exception
+     */
     private function getDateTime(int $timestamp, int $timezoneOffset): DateTime
     {
+        $dateTime = new DateTime('@' . $timestamp);
+
         $timezoneOffset = (int)($timezoneOffset / 60 / 60);
-        $prefix         = '+';
-        if (0 >= $timezoneOffset) {
+
+        if ($timezoneOffset === 0) {
+            return $dateTime;
+        }
+
+        $prefix = '+';
+        if (0 > $timezoneOffset) {
             $prefix = '';
         }
         $dateTimeZone = new DateTimeZone($prefix . $timezoneOffset);
-
-        $dateTime = new DateTime('@' . $timestamp);
 
         $dateTime->setTimezone($dateTimeZone);
 

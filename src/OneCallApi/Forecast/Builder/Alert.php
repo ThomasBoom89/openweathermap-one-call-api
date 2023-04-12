@@ -38,7 +38,7 @@ class Alert implements Builder
         $alert->senderName  = $data['sender_name'];
         $alert->event       = $data['event'];
         $alert->start       = $this->getDateTime($data['start'], $data['timezone_offset']);//$data['start']
-        $alert->end         = $this->getDateTime($data['end'], $data['timezone_offset']);//$data['end']
+        $alert->end         = $this->getDateTime($data['end'], $data['timezone_offset']);  //$data['end']
         $alert->description = $data['description'];
         $alert->tags        = array_unique($data['tags']);
 
