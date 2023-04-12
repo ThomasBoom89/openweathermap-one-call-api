@@ -18,6 +18,7 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Snow as SnowValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
 use function array_key_exists;
+use function is_float;
 
 /**
  * @phpstan-type BuildDataVariantOne array{'snow'?: float}
@@ -39,7 +40,7 @@ class Snow implements Builder
     {
         $snow  = new SnowValue();
         $value = $data['snow'] ?? 0.0;
-        if (array_key_exists('1h', $data['snow'])) {
+        if (!is_float($value) && array_key_exists('snow', $data) && array_key_exists('1h', $data['snow'])) {
             $value = $data['snow']['1h'];
         }
         $snow->value = $value;
