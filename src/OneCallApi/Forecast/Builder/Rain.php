@@ -18,6 +18,7 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Rain as RainValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
 use function array_key_exists;
+use function is_float;
 
 /**
  * @phpstan-type BuildDataVariantOne array{'rain'?: float}
@@ -39,7 +40,7 @@ class Rain implements Builder
     {
         $rain  = new RainValue();
         $value = $data['rain'] ?? 0.0;
-        if (array_key_exists('1h', $data['rain'])) {
+        if (!is_float($value) && array_key_exists('rain', $data) && array_key_exists('1h', $data['rain'])) {
             $value = $data['rain']['1h'];
         }
         $rain->value = $value;
