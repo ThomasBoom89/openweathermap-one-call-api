@@ -19,16 +19,24 @@
     }
   },
   "require": {
-    "php": ">=8.0",
-    "psr/http-client": "^1.0.1",
-    "psr/http-factory": "^1.0.1",
-    "psr/simple-cache": "^3.0.0"
+    "php": ">=8.1",
+    "psr/http-client": "^1.0",
+    "psr/http-factory": "^1.0",
+    "psr/simple-cache": "^3.0"
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "phpunit/phpunit": "9.5.*",
-    "guzzlehttp/guzzle": "7.*",
-    "php-http/mock-client": "^1.5.0",
-    "symfony/cache": "6.0.*"
+    "phpunit/phpunit": "^10.0",
+    "guzzlehttp/guzzle": "^7.5",
+    "php-http/mock-client": "^1.5",
+    "symfony/cache": "^v6.2",
+    "friendsofphp/php-cs-fixer": "^v3.14",
+    "phpmd/phpmd": "^2.13",
+    "phpstan/phpstan": "^1.10"
+  },
+  "config": {
+    "allow-plugins": {
+      "php-http/discovery": true
+    }
   }
 }
