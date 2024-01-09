@@ -1,42 +1,42 @@
 {
-  "name": "thomasboom89/openweathermap-one-call-api",
-  "description": "A wrapper for Openweathermap One Call Api v1",
-  "license": "MIT",
-  "support": {
-    "issues": "https://github.com/ThomasBoom89/openweathermap-one-call-api/issues"
-  },
-  "authors": [
-    {
-      "name": "ThomasBoom89",
-      "email": "51998416+ThomasBoom89@users.noreply.github.com",
-      "homepage": "https://github.com/ThomasBoom89/openweathermap-one-call-api",
-      "role": "owner"
-    }
-  ],
-  "autoload": {
-    "psr-4": {
-      "Thomasboom89\\OpenWeatherMap\\": "src/"
-    }
-  },
-  "require": {
-    "php": ">=8.1",
-    "psr/http-client": "^1.0",
-    "psr/http-factory": "^1.0",
-    "psr/simple-cache": "^3.0"
-  },
-  "require-dev": {
-    "roave/security-advisories": "dev-latest",
-    "phpunit/phpunit": "^10.0",
-    "guzzlehttp/guzzle": "^7.5",
-    "php-http/mock-client": "^1.5",
-    "symfony/cache": "^v6.2",
-    "friendsofphp/php-cs-fixer": "^v3.14",
-    "phpmd/phpmd": "^2.13",
-    "phpstan/phpstan": "^1.10"
-  },
-  "config": {
-    "allow-plugins": {
-      "php-http/discovery": true
-    }
-  }
+	"name": "thomasboom89/openweathermap-one-call-api",
+	"description": "A wrapper for Openweathermap One Call Api v1",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/ThomasBoom89/openweathermap-one-call-api/issues"
+	},
+	"authors": [
+		{
+			"name": "ThomasBoom89",
+			"email": "51998416+ThomasBoom89@users.noreply.github.com",
+			"homepage": "https://github.com/ThomasBoom89/openweathermap-one-call-api",
+			"role": "owner"
+		}
+	],
+	"autoload": {
+		"psr-4": {
+			"Thomasboom89\\OpenWeatherMap\\": "src/"
+		}
+	},
+	"require": {
+		"php": ">=8.2",
+		"psr/http-client": "^1.0",
+		"psr/http-factory": "^1.0",
+		"psr/simple-cache": "^3.0"
+	},
+	"require-dev": {
+		"roave/security-advisories": "dev-latest",
+		"phpunit/phpunit": "^10.5",
+		"guzzlehttp/guzzle": "^7.8",
+		"php-http/mock-client": "^1.6",
+		"symfony/cache": "^v7.0",
+		"friendsofphp/php-cs-fixer": "^v3.46",
+		"phpmd/phpmd": "^2.15",
+		"phpstan/phpstan": "^1.10"
+	},
+	"config": {
+		"allow-plugins": {
+			"php-http/discovery": true
+		}
+	}
 }
