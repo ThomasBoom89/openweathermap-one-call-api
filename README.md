@@ -64,7 +64,7 @@ A: See src/OneCallApi/Unit.php::MAP
 ## License
 
 Openweathermap One Call API
-Copyright (C) 2022 ThomasBoom89. MIT license.
+Copyright (C) 2023 ThomasBoom89. MIT license.
 
 Openweathermap One Call API includes several third-party Open-Source libraries, which are licensed under their
 own respective Open-Source licenses.
