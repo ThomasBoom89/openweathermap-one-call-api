@@ -17,6 +17,8 @@ use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Builder;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Forecast\Value\Wind as WindValue;
 use Thomasboom89\OpenWeatherMap\OneCallApi\Unit;
 
+use function array_key_exists;
+
 class Wind implements Builder
 {
     private Unit $unit;
@@ -36,7 +38,7 @@ class Wind implements Builder
         $wind->speedUnit     = $this->unit->getFromType('speed');
         $wind->direction     = $data['wind_deg'];
         $wind->directionUnit = $this->unit->getFromType('degree');
-        $wind->gust          = $data['wind_gust'];
+        $wind->gust          = !array_key_exists('wind_gust', $data) ? $wind->speed : $data['wind_gust'];
         $wind->gustUnit      = $this->unit->getFromType('gust');
 
         return $wind;
