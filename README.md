@@ -5,6 +5,11 @@
 
 A wrapper for Openweathermap One Call Api v1 -> [Link](https://openweathermap.org/api/one-call-api).
 
+| :zap:        Currently not working due to changes from openweathermap!   |
+|--------------------------------------------------------------------------|
+| Read here -> https://openweathermap.org/one-call-transfer                |
+| I will upgrade to version 3 as soon as possible                          |
+
 ### Attention!
 
 I am not owner or maintainer of the API (https://openweathermap.org/api). This is only a wrapper for it.
