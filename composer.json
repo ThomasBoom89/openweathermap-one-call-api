@@ -32,7 +32,7 @@
 		"symfony/cache": "^v7.0",
 		"friendsofphp/php-cs-fixer": "^v3.46",
 		"phpmd/phpmd": "^2.15",
-		"phpstan/phpstan": "^1.10"
+		"phpstan/phpstan": "^2.0"
 	},
 	"config": {
 		"allow-plugins": {
